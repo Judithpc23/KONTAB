@@ -2,24 +2,23 @@ import random
 
 
 class Kontab():
-    def __init__(self) -> None:
-        self.__empresas = []
-        self.__usuarios = []
+  def __init__(self) -> None:
+    self.__usuarios = []
 
-    def agregarEmpresa(self, empresa):
-        self.__empresas.append(empresa)
+  def register(self, user):
+    if self.__usuarios == []:
+      self.__usuarios.append(user)
+      return True
 
-    def crearCuenta(self, usuario='', password='', nombre=''):
-        cuenta = {'usuario': usuario, 'contraseña': password, 'nombre': nombre, 'id':random.randint(1000000000, 9999999999)}
-        self.__usuarios.append(cuenta)
+    for usuario in self.__usuarios:
+      if usuario.getUser() == user.getUser():
+        return False
+    self.__usuarios.append(user)
+    return True
 
-    def __repr__(self) -> str:
-        return(
-            f'{self.__class__.__name__}'
-            f'{self.__usuarios}'
-        )
-
-kontab = Kontab()
-kontab.crearCuenta('edadul', '2506', 'Esteban Arnedo')
-kontab.crearCuenta('pepe', '1234', 'Pepe Pacheco Perez')
-kontab
+  def __repr__(self) -> str:
+    return(
+      f'{self.__class__.__name__}('
+      f'{self.__usuarios}'
+      f')'
+    )
