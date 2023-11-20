@@ -33,7 +33,6 @@ export const LoginAndRegister = () => {
               <Carousel>
                 {slides.map((s) => (
                   <img src={s} />
-                  
                 ))}
               </Carousel>
             </div> {/*Presentación BOOK*/}  
