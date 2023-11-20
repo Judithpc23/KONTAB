@@ -4,7 +4,41 @@ import { ButtonMateDark } from "../components/buttons";
 import { itemFormRegister } from "../components/ComponentsForm";
 import { Link } from "react-router-dom";
 
-export const FormRegister = () => {    
+import { appFirebase } from "../firebase/credenciales";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+
+const auth = getAuth(appFirebase);
+
+export const FormRegister = () => {
+    const firestore = getFirestore(appFirebase);
+
+    const functAutentication = async(e) => {
+        e.preventDefault();
+        const user = e.target.txtUserR.value;
+        const password = e.target.txtPasswordR.value;
+        const identificacion = e.target.txtIdeR.value;
+        const nombre = e.target.txtNombreR.value;
+        const nit = e.target.txtNitR.value;
+        const nombreEmpresa = e.target.txtNombreEmpresaR.value;
+        const telefono = e.target.txtTelefonoR.value;
+        const correo = e.target.txtCorreoR.value;
+        const pais = e.target.txtPaisR.value;
+        const ciudad = e.target.txtCiudadR.value;
+        const direccion = e.target.txtDireccionR.value;
+        
+
+        try {
+            const infoUsuario = await createUserWithEmailAndPassword(auth, user, password, identificacion, nombre, nit, nombreEmpresa, telefono, correo, pais, ciudad, direccion);
+            console.log(infoUsuario.user.uid);
+            const docRef = await doc(firestore, `usuarios/${infoUsuario.user.uid}`);
+            
+            setDoc(docRef, {Identificación: identificacion, Nombre:nombre, Nit:nit, Empresa:nombreEmpresa, Teléfono:telefono, Correo: correo, País:pais, Ciudad:ciudad, Dirección:direccion})
+        } catch (error) {
+            alert('Error al crear usuario')
+        }
+    }
+
     return(
         <>
             <section className="relative h-full w-full flex flex-col items-center justify-start">
@@ -14,8 +48,7 @@ export const FormRegister = () => {
                     </div>
 
                     <div>
-                        <p className="hidden lg:flex text-[13px] sm:text-[15px] md:text-[1.4rem] xl:text-[1.3rem] mx-5 font-[nunito-sans-light] hover:text-[#0094FF]"><a href="#formLogin" className="hidden lg:flex absolute">Iniciar sesión</a><Link to="/Login" className="">Iniciar sesión</Link></p>
-                        <a className="lg:hidden flex text-[13px] sm:text-[15px] md:text-[1.4rem] xl:text-[1.3rem] mx-5 font-[nunito-sans-light] hover:text-[#0094FF]"><Link to="/Login">Iniciar sesión</Link></a>
+                        <p className="flex text-[13px] sm:text-[15px] md:text-[1.4rem] xl:text-[1.3rem] mx-5 font-[nunito-sans-light] hover:text-[#0094FF]"><a href="#formLogin" className="hidden lg:flex absolute">Iniciar sesión</a><Link to="/Login" className="flex">Iniciar sesión</Link></p>
                     </div>
                 </section>
 
@@ -27,13 +60,31 @@ export const FormRegister = () => {
                         <p className="flex text-[15px] md:text-[1.5rem] xl:text-[1.3rem] text-center mt-5 m-2 font-[nunito-sans]">Registro</p>
                     </div>               
 
-                <form className="relative w-full contents">
+                <form onSubmit={functAutentication} className="relative w-full contents">
                     
                         <div className="carousel w-full mt-2 mb-10">
                             <div className="carousel-item w-full flex-col">
                                 <div id="item1" className="relative w-full">    
                                     <p className="flex text-[15px] xl:text-[1.2rem] px-[2rem] md:px-14 text-center font-[nunito-sans]">Información del usuario</p>
-                                    {itemFormRegister(txtInput("ideR", "number", "Identificación", true), txtInput("txtNombreR", "text", "Nombre", true), txtInput("txtUsuarioR", "text", "Usuario", true), txtInput("txtContraseñaR", "password", "Contraseña", true))}
+                                    <section className="flex flex-col items-center justify-center w-full px-[1.5vh]">
+
+                                        <div className="relative flex flex-col items-center w-[90%] md:w-[80%] mb-2">
+                                            {txtInput("txtIdeR", "number", "Identificación", true)}
+                                        </div>
+
+                                        <div className="relative flex flex-col items-center w-[90%] md:w-[80%] mb-2">
+                                            {txtInput("txtNombreR", "text", "Nombre", true)}
+                                        </div>
+
+                                        <div className="relative flex flex-col items-center w-[90%] md:w-[80%] mb-2">
+                                            {txtInput("txtUserR", "text", "Usuario", true)}
+                                        </div>
+
+                                        <div className="relative flex flex-col items-center w-[90%] md:w-[80%]">
+                                            {txtInput("txtPasswordR", "password", "Contraseña", true)}
+                                        </div>
+
+                                    </section>
                                 </div>
                                 <div className="flex justify-between mx-4 md:mx-10 lg:pb-5 lg:mx-[3rem]">
                                     <a href="#item1" className="text-[#7BA8FF] btn btn-neutral bg-transparent shadow-none border-0 font-[nunito-sans-light] normal-case text-[11px] hover:bg-transparent hover:text-slate-400">Atrás</a> 
@@ -44,7 +95,25 @@ export const FormRegister = () => {
                             <div className="carousel-item w-full flex-col">
                                 <div id="item2" className="relative w-full">
                                     <p className="flex text-[15px] xl:text-[1.2rem] px-[2rem] md:px-14 text-center font-[nunito-sans]">Información de la empresa</p>
-                                    {itemFormRegister(txtInput("nitR", "number", "Nit (opcional)", false), txtInput("txtNombreEmpresaR", "text", "Nombre", true), txtInput("txtTelefonoR", "number", "Teléfono", true), txtInput("txtCorreo", "email", "Correo", true))}
+                                    <section className="flex flex-col items-center justify-center w-full px-[1.5vh]">
+
+                                        <div className="relative flex flex-col items-center w-[90%] md:w-[80%] mb-2">
+                                            {txtInput("txtNitR", "number", "Nit (opcional)", false)}
+                                        </div>
+
+                                        <div className="relative flex flex-col items-center w-[90%] md:w-[80%] mb-2">
+                                            {txtInput("txtNombreEmpresaR", "text", "Nombre", true)}
+                                        </div>
+
+                                        <div className="relative flex flex-col items-center w-[90%] md:w-[80%] mb-2">
+                                            {txtInput("txtTelefonoR", "number", "Teléfono", true)}
+                                        </div>
+
+                                        <div className="relative flex flex-col items-center w-[90%] md:w-[80%]">
+                                            {txtInput("txtCorreoR", "email", "Correo", true)}
+                                        </div>
+
+                                    </section>
                                 </div>
                                 <div className="flex justify-between mx-4 md:mx-10 pb-5 lg:mx-[3rem]">
                                     <a href="#item1" className="text-[#7BA8FF] btn btn-neutral bg-transparent shadow-none border-0 font-[nunito-sans-light] normal-case text-[11px] hover:bg-transparent hover:text-slate-400">Atrás</a> 
@@ -55,7 +124,26 @@ export const FormRegister = () => {
                             <div className="carousel-item w-full flex-col">
                                 <div id="item3" className="relative w-full">
                                     <p className="flex text-[15px] xl:text-[1.2rem] px-[2rem] md:px-14 text-center font-[nunito-sans]">Información de la empresa</p>
-                                    {itemFormRegister(txtInput("txtPaisR", "text", "País", true), txtInput("txtCiudadR", "text", "Ciudad", true), txtInput("txtDireccion", "text", "Dirección", true), fileInput())}
+                                    <section className="flex flex-col items-center justify-center w-full px-[1.5vh]">
+
+                                        <div className="relative flex flex-col items-center w-[90%] md:w-[80%] mb-2">
+                                            {txtInput("txtPaisR", "text", "País", true)}
+                                        </div>
+
+                                        <div className="relative flex flex-col items-center w-[90%] md:w-[80%] mb-2">
+                                            {txtInput("txtCiudadR", "text", "Ciudad", true)}
+                                        </div>
+
+                                        <div className="relative flex flex-col items-center w-[90%] md:w-[80%] mb-2">
+                                            {txtInput("txtDireccionR", "text", "Dirección", true)}
+                                        </div>
+
+                                        <div className="relative flex flex-col items-center w-[90%] md:w-[80%]">
+                                            {fileInput()}
+                                        </div>
+
+                                    </section>
+                                    
                                 </div>
                                 <div className="w-auto flex justify-between mx-4 md:mx-10 lg:mx-[3rem]">
                                     <a href="#item2" className="text-[#7BA8FF] btn btn-neutral bg-transparent shadow-none border-0 font-[nunito-sans-light] normal-case text-[11px] hover:bg-transparent hover:text-slate-400">Atrás</a> 
