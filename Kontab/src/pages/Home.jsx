@@ -1,5 +1,4 @@
 import { getAuth, signOut } from "firebase/auth"
-import { ButtonMateDark } from "../components/buttons"
 import { appFirebase } from "../firebase/credenciales"
 
 const auth = getAuth(appFirebase)
