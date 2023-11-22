@@ -1,11 +1,12 @@
 import { fileInput, logoSoftware, txtInput } from "../components/ComponentsForm";
 import { ButtonMateDark } from "../components/buttons";
+
+import { itemFormRegister } from "../components/ComponentsForm";
 import { Link } from "react-router-dom";
 
 import { appFirebase } from "../firebase/credenciales";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { toast } from "react-toastify";
 
 const auth = getAuth(appFirebase);
 
@@ -33,26 +34,8 @@ export const FormRegister = () => {
             const docRef = await doc(firestore, `usuarios/${infoUsuario.user.uid}`);
             
             setDoc(docRef, {Identificación: identificacion, Nombre:nombre, Nit:nit, Empresa:nombreEmpresa, Teléfono:telefono, Correo: correo, País:pais, Ciudad:ciudad, Dirección:direccion})
-            toast.success('¡Bienvenido! :)',{
-                position:'top-center',
-                autoClose:2000,
-                hideProgressBar:true  ,
-                pauseOnHover: false,
-                closeOnClick:false,
-                draggable:true,
-                progress:undefined,
-                theme:"colored"
-              })
         } catch (error) {
-            toast.error('Error al crear usuario. \nCorreo existente o contraseña invalida.',{
-                position:'top-center',
-                autoClose:4000,
-                hideProgressBar:true  ,
-                pauseOnHover: false,
-                closeOnClick:false,
-                draggable:true,
-                progress:undefined,
-              })
+            alert('Error al crear usuario')
         }
     }
 

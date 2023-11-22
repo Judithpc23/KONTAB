@@ -25,11 +25,12 @@ export const App = () => {
 
   });
 
+
   return (
     <>  
 
       <Routes>
-        {usuario ? <Route path="/"element={<Home correoUsuario = {usuario.email}/>}/> : <Route path="/" element={<LoginAndRegister/>}/>}
+        {usuario ? <Route path="/"element={<Home correoUsuario = {usuario.email} informacion = {usuario.info}/>}/> : <Route path="/" element={<LoginAndRegister/>}/>}
         <Route path="/Register" element={<MiniFormRegister/>}/>
         <Route path="/Login" element={<LoginAndRegister/>}/>
       </Routes>

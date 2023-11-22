@@ -4,9 +4,8 @@ import { ButtonMateDark, CheckboxRippleEffect } from "../components/buttons"
 
 import { appFirebase } from "../firebase/credenciales";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { toast } from "react-toastify";
-
 const auth = getAuth(appFirebase)
+
 export const FormLogin = () =>{
 
     const functAutentication = async(e) => {
@@ -16,27 +15,9 @@ export const FormLogin = () =>{
         console.log(user)
 
         try {
-            await signInWithEmailAndPassword(auth, user, password)
-            toast.success('¡Es grato tenerte de vuelta! :)',{
-                position:'top-center',
-                autoClose:2000,
-                hideProgressBar:true  ,
-                pauseOnHover: false,
-                closeOnClick:false,
-                draggable:true,
-                progress:undefined,
-                theme:"colored"
-              })  
+            await signInWithEmailAndPassword(auth, user, password)    
         } catch (error) {
-            toast.error('Error: Usuario o contraseña incorrectos :|', {
-                position:'top-center',
-                autoClose:2000,
-                hideProgressBar:true  ,
-                pauseOnHover: false,
-                closeOnClick:false,
-                draggable:true,
-                progress:undefined,
-              });
+            alert('Usuario o contraseña incorrectos')
         }
         
     }
