@@ -10,6 +10,7 @@ import { appFirebase } from './firebase/credenciales';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 
+
 const auth = getAuth(appFirebase)
 const firestore = getFirestore(appFirebase);
 
@@ -29,10 +30,12 @@ export const App = () => {
     <>  
 
       <Routes>
-        {usuario ? <Route path="/"element={<Home correoUsuario = {usuario.email}/>}/> : <Route path="/" element={<LoginAndRegister/>}/>}
+        {usuario ? <Route path="/"element={<Home correoUsuario = {usuario.email} />}/> : <Route path="/" element={<LoginAndRegister/>}/>}
         <Route path="/Register" element={<MiniFormRegister/>}/>
         <Route path="/Login" element={<LoginAndRegister/>}/>
       </Routes>
+
+      
 
     </>
     

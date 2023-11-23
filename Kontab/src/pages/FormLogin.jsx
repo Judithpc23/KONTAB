@@ -6,6 +6,7 @@ import { appFirebase } from "../firebase/credenciales";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 
+
 const auth = getAuth(appFirebase)
 export const FormLogin = () =>{
 
