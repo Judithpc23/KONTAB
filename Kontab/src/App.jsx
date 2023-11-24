@@ -26,7 +26,7 @@ export const App = () => {
 
       <Routes>
 
-      {usuario ? <Route element={<Home/>}/> : <Route path="/principal" element={<LoginAndRegister/>}/>}
+      {usuario ? <Route element={<Home/>}/> : <Route path="/main" element={<LoginAndRegister/>}/>}
 
         <Route path="/" element={<Home/>}/>
         <Route path="/Register" element={<MiniFormRegister/>}/>
