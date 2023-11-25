@@ -4,7 +4,6 @@ export function ButtonMateDark(nombre, ide, type="button") {
     return (
       <Button type={type} className="flex items-center justify-center w-[90%] h-[35px] md:h-[38px] xl:h-[3.5rem] font-[nunito] text-white bg-[#7BA8FF] hover:bg-[#699bff] text-[15px] md:text-[1.5rem] lg:text-[15px] xl:text-[1.5rem] text-center rounded-none" id={ide}>{nombre}</Button>
       )
-  
   }
 
 export function CheckboxRippleEffect() {

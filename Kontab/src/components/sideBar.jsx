@@ -1,7 +1,12 @@
 import React from "react";
 import {Link} from 'react-router-dom';
+import { getAuth, signOut } from "firebase/auth"
+import { appFirebase } from "../firebase/credenciales"
 
-export function SideBarDefault() {
+const auth = getAuth(appFirebase);
+
+export function SideBarDefault({correoUsuario}) {
+    
     return (
         <div>
             <Link to="/Inicio">
@@ -17,7 +22,7 @@ export function SideBarDefault() {
                 <Link to="/Usuario">
                     <div>
                         <p className="lg:text-[150%] md:text-[100%]">USUARIO</p>
-                        <p className="lg:text-[100%] md:text-[60%]">Correo del usuario</p>
+                        <p className="lg:text-[100%] md:text-[60%]">{correoUsuario}</p>
                     </div>
                 </Link>
 
@@ -79,17 +84,14 @@ export function SideBarDefault() {
                     </li>
                     </Link>
 
-
                     <hr className=" m-[0px] p-[0px] marginRight-[10%] marginLeft-[10%]"></hr>
 
-                    <Link to="/Login">
                     <li>
-                        <a className="hover:bg-white hover:bg-opacity-20 hover:text-white h-[50px] flex align-center mt-[0px] pt-[0px">
-                            <img className="2xl:h-12 2xl:w-12 xl:h-12 xl:w-12 md:h-6 md:w-6 mr-4" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAHw0lEQVR4nO2de+yXUxzHTzeKcouJLMolskLmNteMZNjMZRg1t40RjdxyqZZIYWEzatiYVmbmOi3JEKk2hkUkJZdyGbopSr3s7Hu+7buv3/f5fM7zfZ7v9zzf53n91drv+zmfc97Pc87n3D6PMQUFBQUFBTkEOBh4DdgA/A3MBPo3269cAgwAfuf/rAGOabZ/eRTjN2qzGji22X7mAmQxClECFKNM8aYEJEaZQpSAxChTiBKQGGUKUQISo0whSkBi5FMUoAcwFLgaOCQwMSpFiTV5BA4ArgKGAT1NyAA3AP9sqzZsBaYCnQISI5YoQAfgUWDLNguwGbjDhAhwD7UZHZgY3qIAt1CbSSYkgDFEYxu5Q4Ji/FX1pLbF2iRFAb4X7DxoQgAYp6x49wTFOMWt7kZxkmvsukUBOivtPGyaCTBc6ei6Wm8I0Af41UcMU/qdJMj2tpE9RPkT6BtRV62Pt5tmAJzqBjUNj0TYedFXDK0g7u98RJlpagCMV9qwXenZppEA+9fYi2iL94AuEbbs2+Mlho8gnqJsrhUR2v93G2Aa7J5MP9MIgB2BLzzE6CrYs857ieEriIcoW6t/18ZYohXlG2BnkzbAY0qH3rHiKey94StGHEGUoiyo/k0NUd5UtsHTJk1c5CKFm5YPgR2UNgfUCFHX1xIjriAVotgBvJpNwIlKn23AMEfRDvaNG2LSwDawew0lbLzew9P24cBs1yj/um4hsg+OK4j7bV9XRjkoma8Vo8JGd2Cpsj128rGtdeAhReG2ixlYRxmdPP42tiCV5Wn+LuL3hyrGQMsTccuoVfC+igawDE204JQFSQLgPEW7bI6a48Qp9BlFoa8lVmCGBHG+TFO0z4ykCjtQMQH8s9FL0YQliB1PVikG+COSKGy6Qv1hidQso4I4fy5QtNPr9RbS00U9UXwOtE+sZhkVxPlkw33pLTmongJGK1Q/K9FaZVuQExXtNTGu8fbAd4LxBUC7xGuWUUGcX28Jfv3sE95XGh6iUPucVGqVbUEGKdrt/DRCuR+kXcCcCtIOWCL49mqc7krakBmbWq0yLIjz7TbBt/Ve/gFHCQbtAmOvVGuVbUH2dOtyUQzyMXi3YGxhqjXKuCDOv3cF/yb4GJsrGLs31dq0hiCjBP8+8TkQtlEw5rVUnVNBBiq6fXnPyM4kBUPrYsXR+ROkvSIwkte2gHMFI/NMABC4IM5Hu+kWxaUaI3cJRp4yAUA2BLFngaO4T2PkecHISBMAZEOQawQfX9EYeTvExcSMCmIPhUQxX2NkoWDkKBMAZEOQfoKPX2qMfCUYSW5vuPUF6Sn4+KPGyE+Ckb1NAJANQboJPq7VGJHuVXQzAUA2BGknHCzcKu62Ks4ZJX/oq3UFae8avRZbxA0+268JFS26LCX24RXaco3GSDGoBzaoF2FvQthr4YIgi5NYf/HfD04BohfuNjTr8EWVj2cIbfmRxsgUwcidJgCAlyJ8nGUCALhRaMtpGiM3C0aeNQFAqTto6zrcxnpO4CcJ8LjQlvL9fbtWFfr2bdVlnznudKUNId8PZWnH4m6RRXGR9kJnFJuke4ONBtguhHlHGz7Z+zJRHKbdwm3rylclZzakVhlGsdK7Qf0Q2YNcqZxPzRHAWKENZ/sYGyEYW5RqbVoAd+45mWjVDZYS9V8+aVEoXXKSONZ3lVK6ETQ51VplGEUaDjtGd/Q1OjmVY/UtDqUV3uVC201N46CX5YpUapVh7NxC0W4nxDVur6tFsbSZVxJCw3X1Hwtttjz2OpuQ1k4/28wJwDmK9op/jcNms1FMEm26jc4m5wAdgU+FtrLrbHvVW9AEhep3m5wDjKwnkZtPQbu7Gz/SMkAfk1Mo5SperVgDTOaSkyIExq26Nvy+eiADeVTOrzJTkix0N2USSFV+3lYCuFXRLmvqHjvaKNim15awexKnmZwAHF2VybsWw9N6NT9QFP6LzY9uWhxKKaukI1O4eUk6czW36Kh5IpYl/ooGhAt0FivawWZROrrZG/dlbEy+i2kxgK4uJaCGUSGc+KhkEbCPaREoBTdSxp8yMxsWddon33VLGpaHcoWhHoD9FKc6y6zyTQRaN3aD3iOFt020P9hkFOBkYKWyrutTHzcER6U77WW2ukuQmdlDoRRZjlCkySizqekHQFxWTinrXCVzs9CFUToOJd23rH7gLjMhAFzuKYoNne/XZr9uJC6V+BiPN788Ib7ehIRLOOBTCVzGOrsCsF0gy+fDlNmqqx+uS0yIeH7VppIV7uMwXZrg8/buPrk2aqxkXfDBipvNa3LEt8VqmynCBQvtUh6sjweeBP6I6at9u480WcBd5XqB+ljhPrl3sU0IloBPewAX2jzsMd+GSl4BdjVZA7guxrhSiyXuiOsk99HKwcBxQH/3Have7t/2/053Y9NE4GXga+Hypc94cVMIl4HqPcU3i+wz1wpuWuxEhvQtwBD53U0OW2831J1iGR8zEms0a12Xl72xImbKiRGK88PNEuIBu7Jr8obbW7jWZqmj+Sx0H1cOIlNFKIP/OEVW6CT51mZ1i/uZ8dwA9HLrY88p9621rHQZ82xI3LvZ9cwslL5gY+cXV7r+fboLpe3u3WfuSV/mDofPc18omOHmLLbxT7D74M2uR0FBQUFBgUmR/wAUjPXdMoWg6wAAAABJRU5ErkJggg==" />
+                        <button onClick={()=>signOut(auth)} className="hover:bg-white hover:bg-opacity-20 hover:text-white h-[50px] flex align-center mt-[0px] pt-[0px">
+                            <img className="2xl:h-12 2xl:w-12 xl:h-12 xl:w-12 md:h-6 md:w-6 mr-4" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAHw0lEQVR4nO2de+yXUxzHTzeKcouJLMolskLmNteMZNjMZRg1t40RjdxyqZZIYWEzatiYVmbmOi3JEKk2hkUkJZdyGbopSr3s7Hu+7buv3/f5fM7zfZ7v9zzf53n91drv+zmfc97Pc87n3D6PMQUFBQUFBTkEOBh4DdgA/A3MBPo3269cAgwAfuf/rAGOabZ/eRTjN2qzGji22X7mAmQxClECFKNM8aYEJEaZQpSAxChTiBKQGGUKUQISo0whSkBi5FMUoAcwFLgaOCQwMSpFiTV5BA4ArgKGAT1NyAA3AP9sqzZsBaYCnQISI5YoQAfgUWDLNguwGbjDhAhwD7UZHZgY3qIAt1CbSSYkgDFEYxu5Q4Ji/FX1pLbF2iRFAb4X7DxoQgAYp6x49wTFOMWt7kZxkmvsukUBOivtPGyaCTBc6ei6Wm8I0Af41UcMU/qdJMj2tpE9RPkT6BtRV62Pt5tmAJzqBjUNj0TYedFXDK0g7u98RJlpagCMV9qwXenZppEA+9fYi2iL94AuEbbs2+Mlho8gnqJsrhUR2v93G2Aa7J5MP9MIgB2BLzzE6CrYs857ieEriIcoW6t/18ZYohXlG2BnkzbAY0qH3rHiKey94StGHEGUoiyo/k0NUd5UtsHTJk1c5CKFm5YPgR2UNgfUCFHX1xIjriAVotgBvJpNwIlKn23AMEfRDvaNG2LSwDawew0lbLzew9P24cBs1yj/um4hsg+OK4j7bV9XRjkoma8Vo8JGd2Cpsj128rGtdeAhReG2ixlYRxmdPP42tiCV5Wn+LuL3hyrGQMsTccuoVfC+igawDE204JQFSQLgPEW7bI6a48Qp9BlFoa8lVmCGBHG+TFO0z4ykCjtQMQH8s9FL0YQliB1PVikG+COSKGy6Qv1hidQso4I4fy5QtNPr9RbS00U9UXwOtE+sZhkVxPlkw33pLTmongJGK1Q/K9FaZVuQExXtNTGu8fbAd4LxBUC7xGuWUUGcX28Jfv3sE95XGh6iUPucVGqVbUEGKdrt/DRCuR+kXcCcCtIOWCL49mqc7krakBmbWq0yLIjz7TbBt/Ve/gFHCQbtAmOvVGuVbUH2dOtyUQzyMXi3YGxhqjXKuCDOv3cF/yb4GJsrGLs31dq0hiCjBP8+8TkQtlEw5rVUnVNBBiq6fXnPyM4kBUPrYsXR+ROkvSIwkte2gHMFI/NMABC4IM5Hu+kWxaUaI3cJRp4yAUA2BLFngaO4T2PkecHISBMAZEOQawQfX9EYeTvExcSMCmIPhUQxX2NkoWDkKBMAZEOQfoKPX2qMfCUYSW5vuPUF6Sn4+KPGyE+Ckb1NAJANQboJPq7VGJHuVXQzAUA2BGknHCzcKu62Ks4ZJX/oq3UFae8avRZbxA0+268JFS26LCX24RXaco3GSDGoBzaoF2FvQthr4YIgi5NYf/HfD04BohfuNjTr8EWVj2cIbfmRxsgUwcidJgCAlyJ8nGUCALhRaMtpGiM3C0aeNQFAqTto6zrcxnpO4CcJ8LjQlvL9fbtWFfr2bdVlnznudKUNId8PZWnH4m6RRXGR9kJnFJuke4ONBtguhHlHGz7Z+zJRHKbdwm3rylclZzakVhlGsdK7Qf0Q2YNcqZxPzRHAWKENZ/sYGyEYW5RqbVoAd+45mWjVDZYS9V8+aVEoXXKSONZ3lVK6ETQ51VplGEUaDjtGd/Q1OjmVY/UtDqUV3uVC201N46CX5YpUapVh7NxC0W4nxDVur6tFsbSZVxJCw3X1Hwtttjz2OpuQ1k4/28wJwDmK9op/jcNms1FMEm26jc4m5wAdgU+FtrLrbHvVW9AEhep3m5wDjKwnkZtPQbu7Gz/SMkAfk1Mo5SperVgDTOaSkyIExq26Nvy+eiADeVTOrzJTkix0N2USSFV+3lYCuFXRLmvqHjvaKNim15awexKnmZwAHF2VybsWw9N6NT9QFP6LzY9uWhxKKaukI1O4eUk6czW36Kh5IpYl/ooGhAt0FivawWZROrrZG/dlbEy+i2kxgK4uJaCGUSGc+KhkEbCPaREoBTdSxp8yMxsWddon33VLGpaHcoWhHoD9FKc6y6zyTQRaN3aD3iOFt020P9hkFOBkYKWyrutTHzcER6U77WW2ukuQmdlDoRRZjlCkySizqekHQFxWTinrXCVzs9CFUToOJd23rH7gLjMhAFzuKYoNne/XZr9uJC6V+BiPN788Ib7ehIRLOOBTCVzGOrsCsF0gy+fDlNmqqx+uS0yIeH7VppIV7uMwXZrg8/buPrk2aqxkXfDBipvNa3LEt8VqmynCBQvtUh6sjweeBP6I6at9u480WcBd5XqB+ljhPrl3sU0IloBPewAX2jzsMd+GSl4BdjVZA7guxrhSiyXuiOsk99HKwcBxQH/3Have7t/2/053Y9NE4GXga+Hypc94cVMIl4HqPcU3i+wz1wpuWuxEhvQtwBD53U0OW2831J1iGR8zEms0a12Xl72xImbKiRGK88PNEuIBu7Jr8obbW7jWZqmj+Sx0H1cOIlNFKIP/OEVW6CT51mZ1i/uZ8dwA9HLrY88p9621rHQZ82xI3LvZ9cwslL5gY+cXV7r+fboLpe3u3WfuSV/mDofPc18omOHmLLbxT7D74M2uR0FBQUFBgUmR/wAUjPXdMoWg6wAAAABJRU5ErkJggg=="/>
                             Salir
-                        </a>
+                        </button>
                     </li>
-                    </Link>
 
                 </ul>
             </div>

@@ -7,8 +7,13 @@ import {
 
 import { Link } from "react-router-dom";
 
+import { getAuth, signOut } from "firebase/auth"
+import { appFirebase } from "../firebase/credenciales"
+
+const auth = getAuth(appFirebase);
+
  
-export function NavbarDefault() {
+export function NavbarDefault({correoUsuario}) {
   const [openNav, setOpenNav] = React.useState(false);
  
   React.useEffect(() => {
@@ -23,10 +28,10 @@ export function NavbarDefault() {
     <ul className="mt-2 flex flex-col-reverse gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:space-x-6">
 
       <Link to="/Salir">
-      <section href="" className="lg:hidden flex items-center gap-x-2 p-1 border-b-[1px] lg:border-b-0 cursor-pointer text-[#353C43] hover:bg-gray-50">
+      <button onClick={()=>signOut(auth)} className="lg:hidden flex items-center gap-x-2 p-1 border-b-[1px] lg:border-b-0 cursor-pointer text-[#353C43] hover:bg-gray-50">
       <img className="h-12 w-12 lg:h-8 lg:w-8 mr-2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAERElEQVR4nO1ZSYhcVRR9TnGIY4PihIhZCCIKCioO6FYNikOciKC4EJcu3Cl/I3bVv+e83z+2YjmBLhxaIYILFUWDOwfQJok4xZCOMwmIOEbTLdd+Ld9b73cN/1dXlebAg+LXfffe8+59903O7cP/CCJyJcmdJL/y3l/txhEici2APSQXtAH4k+R6N84kOI5kpITEWJGRDiSGTsZ7fwLJDQAezbLs1CokCu0PADfGdE1NTZ0C4BEAD5I8qRYS6jiA7QUHZhcWFvbrRCKMeiwSHckAeK8gM5em6ZpKJBqNxskAdhhnfjNG15aQWB9x/BZ13pKxpZnkj0Zmp0apLxIkDyX5fiQlaOTmyvLfEpmZmTlAI2DJAPjSDM4DkWh+ICKreyYC4MmIsqfUGUPku7JJHCMSvv+LDIDvizqTJNmf5BORQXy6JxIkr4go2agGrKyIXA9gN4BdNt/LiCg0nXTF174kr7N6k0UyL0QG86quSCRJcoidFyQ3T09PH97TaHQg0g1EZLUWF5uGrVbrsG463x2pLOf2SqIOIoo0Tc8i+bvx6R63HPI8P7iY82EEUtcn6iCiIDlpfNqlxciVIZTHIvMfSE64IRPJsuzoMJf+0SUity5H5A1DRPolUSeRkqhscjE0Go2jTEmcz7LsdDciRNI0XaM+mVLfni0krzHRmK1Com4iCl0UjY/rnAXJpgkd3OgRaRgivk2I5MtG6KYqRgdBhOQ6M9ivxIx+XBTS+l3F6CCIiMgZhsi2NiG7fojIcW70IjJhiOyOGf3FpFb5gjMkIkmSHGh3HWNJpNVqHWQisidm9Nv/RGqR3FoU8t6fU8Vo0Pl5QedcVX3p4gaymDWfxIxuNGxvrmpYzzUAvib5TdfniB7Kry4ZbUKR4+UGVxPsZUW/AJB13JmLyOVG6CM3YgCwxfi4tk1IT4CRA8zZbkQgImfaipXn+ZFRYQAvDSq96k4rxuZH8aLNsP65jjJcFXmeH0vyJ1NVbyjtEO6dPjPMH3ZDBoCHjE9zSZKsWrYTyTtNp70kL1gxrw1InmcXVgB3uW72MwA+NB13VDm794tms3mELnpmYLfqVqUrBd77S0IkimRe7xjOGtFa3Fe9anyYF5HLKh32g6IX9crIDRhJkqwC8HzEftrvlvktqyzctAwszbLFq5/XIiTe7jqlYkrtleXSnAFwcd0kAFxo3mKW7G2ZnJw8ppLyNE2PLyEzH27MK78oNZvNE0k+ZudlaJvrfLXScL8ZMfL3w48+yfVTokXkfH1iI/lrie5NlSNRMmfuLxm1JcPbATxO8g6tfN7708JhaEJ/azrqf2H0vyjTQ3Kv7sbVphsU9GYewDvLOFG1zXrvL3IrgbCVuc1eIVVsn5K8faBRKEN4VdJT4LO6wezV+dDnOT1XVD3P14bwtnIpyXtJPkPyXb1AC89y2rbpN/0PwH26Qq/E4roPbkj4CzHgO1G152NCAAAAAElFTkSuQmCC"></img>
         <a className="text-[20px] hover:text-[#7BA8FF]">Salir</a>
-      </section>
+      </button>
       </Link>
       
       <Link to="/Ayuda">
@@ -98,7 +103,7 @@ export function NavbarDefault() {
       
       <Link to="/Usuario">
       <section className="flex items-center gap-x-2 p-1 border-b-[1px] lg:border-b-0 text-[#353C43] hover:bg-gray-50 p-4">
-        <a className="text-[15px] cursor-pointer hover:text-[#7BA8FF]">User1@outlook.com</a>
+        <a className="text-[15px] cursor-pointer hover:text-[#7BA8FF]">{correoUsuario}</a>
         <img className="h-12 w-12 lg:h-10 lg:w-10 mr-2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAHtUlEQVR4nN1bV4wcRRAdgslR5PRBMCIfBv4RItiYZFsYYZIwHNE2wYDAAjQi+W633+u95Q7QgoQBWWAWkI0tBBIYISEQ0aQ/JAMOYBN+CAZjwqHy9S51fbN7uzu94VzSSKudmarqnqrqV9XVUdQiiuN420wmM94Ycw7JmSRnk7zTXbMBXOnuHSHPRmOdent7dwdwPsk+AJ+S/JPkYI3Xn+4deff8fD6/WzQWqFgsbmOtPYPkMwA21DHgqheAjSSXkZxeKBTGRZ1GJHcEMAfAqlEGsxrA6wCeBNAPoNdd/SQXkHxDnhllMlYBmBXH8Q7tHncUx/HWJK8DsL6Cwh+R7AFw5sDAwC618s1kMrtaa89yk/NxBd7rAHSLDlE7CMAEku8lKUbyIQBHhZKVy+WOBjA/aaIBvEuyK2oVDQ4ObgVgLoBNnjLfNNs0xdXciuG7mgTYW0S3qAWRfakn/A8AcSt90sWc+0S2Zw1LRMemCLXWHuCWpmHml81mD4/aRIIZfDcE8Ek2m90/qCBr7WEAVioh/wLIdsKSJDqQpOik9FspOgcRYIzZl+SXapb/AnBV1GFE8jIdl9wkHBDC5z9VTDcYY86OOpRITtYATNyhYRQ5ODi4FcnFitmmTh58iRwS1bB7WUOrA4C5ns9fGo0RInmFjgmyRNYNcjDcn7LRGCOS1sMJXfXA2/f0Uhcy2os5WmtPEosyxtwql/yW/0ICmTiOtwPwvh5HTbAZwLUa5IRa5/v6+vYDkCP5bZVEZ618OVl5QsgEcKTLJEv8u2tBWOvVC3Eg6Hw7gF/rSIF/kRgUwiIAPKDG811VxMqhKk0Z26eFt/I+yWcTvrRM8iLnp9b9/j5hIhbm8/ntA+QPaxTPGxMfLBQK43SSIYlNGsFuGfUHv4LkpCRflP9kmZW125+EtJZA8ibvw44suVlrz9MpbdqvL2bvffV8LbU+ecYVSPS7c9Po4ru2AKakh15QDzwYAD7/ogffgNID6v1fJYim0UmKK4rfcyMgL1VqmbaY4aJ92ewbqfI6S9AwHGl0MsYco3j9LlWnqETW2guUwh8F8H291E1qlJeYquKzJm0s0PEFwLlaUJ8S1JNGiLX2FB3t09TspMqsVwcBS2l0I5lR47TlG56pnZlSyCVKyKI0vBy/ouJ3cUpek7RrRiVfK2VPkkDUU72tIOS2UH7r+DHUaiCpcSlJEoRYLBa3kRL0eDUrqwMoHHoCbKgJcPzK8clK1cjtx5UEvJ5WAIAZneoCjt/yEj8j9Q3ZlFQCFqQVAODkkEEQwA+K34QA+j2txnuFj/8fDpT8rB02yw2Stk5xzxDJkQZYJGfLH/PUDM9PKyDBbz9pBAi5au9nIeOJkIxRTcA8UfYeJaQ3hJB8Pr8PgJ/TWBaAR3R6nBYKJ2EBAHf7UfvxKBDpmqLj3V+LJbis9BHv3ZtD6UXyiWGrCslr1B8vhhLkIPFCbyACuCZvXn89kv+cz5fN3l3PRAGJ5EuK99XD8DaAN0MKk2KGPwnu+h7A86ogUtTRXg8+bUHEJwBvDctTjDHHqQlYFQUmsQQpfOr0eLRL4kdIs9ekGzCMMceUqqflEnjq7aTqNQJ65amkDhJIEG2GDiQPUpO8sVztBvC5ujElaiI5nCD7DjNUWXxGLpc7sdn7+8aYaSOSISEv6qZKhzuZvHT4/6XZGHOhuvFFtIWSjE35/7TyDSkP6ZJY2sJDJ5Iu1MhYR+wak3xZPdAXbWHkVZoXj3iA5FS9Todef9tJMhYAPykLv2DEQ/FQZai8RIVchx3vLun0lAQEwGMAnnK5ftH9flTuuXjUFbJfWMail9okJLqZdF5A8sc0Pbqur+gukq/VuS9YToDkXWmmNsYc2qgeruT/4zD8X4kKhcJO3h7dgw2YWrdsRXsNCqku16AhPLvrdU1p2lR81ssYq75grb1eCf9t2AZCBTLG7Oy+9rpRUN4S19E1xxhzuXOJ6a6jY467t6QaWpQdXrGKUQcyZPp7ez1DN9Rai1/hXtjU39+/1ygTdlGFBmdpoFwqJbfe3t6DRxU8UvlD3LmCZXqPX+ctEi9G0e1Yjfwq+r5PojDJ+6XhKKre8PBqwsC/ko3Rnp6ePaNAJLxI3gHg64SJeKVaQ4XscksdMFjfoJBsnvjmLqYp3SXNPO0hvJ2LJsk+PWoFWWuvB/C3UuAfSeAkDrREgSiKZPPGnTfQ3aF/ywdoqmAAsTfzUv09NWoTkTzN7zkK0daTSLp05gS9n8lkDozaTKKD7garqRmqESL5sBeA2AmnuxzKLO8fNi2XyWQyB+p00l1vB42ujbXLv+N9/c+bZpmZTGZX/8CEdFtIfb2VyZNDnPcmHZioBbiloniok3ReAjgRpHeD1BibPPBZPlJ0utzZ0gNU2Wz2hBJi9JSRbqweMc9QsmQL3zU5jegldKfKjo/aQcUh2Hx1pfZXV2yVE2QTc7ncHrXylWddN8dDCXFHL8Ez23ZsTpOAIGlJFxhcLaNz95e7Q5J9pYOTrkdpgWzMCNytlknKSRDJ72tJhlpOxaH9/CnScxj46KzwKkolpyO+eK1W4erw8qU/lLNGdQxanv3A9RtO7civHdVJbr//CIkHcujK5f+bj8+7c8fy30R5ppWn0f4D2cAnUtWzRJsAAAAASUVORK5CYII="></img>
       </section>
       </Link>

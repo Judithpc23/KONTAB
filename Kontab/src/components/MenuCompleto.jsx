@@ -3,7 +3,7 @@ import { SideBarDefault } from "./sideBar";
 import { NavbarDefault } from "./navBar";
 import { Route,Routes } from "react-router-dom";
 
-import {Home} from '../pages/PrincipalPages/Home';
+import {Inicio} from '../pages/PrincipalPages/Inicio';
 import {Ayuda} from '../pages/PrincipalPages/Ayuda';
 import {Contactos} from '../pages/PrincipalPages/Contactos';
 import {Gastos} from '../pages/PrincipalPages/Gastos';
@@ -12,24 +12,24 @@ import {Inventario} from '../pages/PrincipalPages/Inventario';
 import {Usuario} from '../pages/PrincipalPages/Usuario';
 
 
-export const MenuCompleto = () => {
+export const MenuCompleto = ({correoUsuario}) => {
 
     return(
 
         <div id="SideBar" className="flex flex-row justify-between h-screen w-full bg-[#F4F8FF]">
 
             <div className="hidden lg:flex flex-col lg:w-[20%] md:w-[15%] min-h-screen min-w-[200px] bg-[#7BA8FF] text-white">
-                <SideBarDefault />
+                <SideBarDefault correoUsuario={correoUsuario} />
             </div>
         
             <div className="md:flex flex-col lg:items-end lg:w-full h-[58px] w-[100%] bg-[#ffff] border-b-[1px] border-[#A5C4FF]">
-                <NavbarDefault />
+                <NavbarDefault correoUsuario={correoUsuario}/>
         
-                <div className="bg-[#000] w-[100%]  min-h-[90%] mt-2">
+                <div className=" flex justify-center items-center w-[100%]  min-h-[92vh] ml-5  bg-blue-500">
                     
                     <Routes>
                     
-                        <Route path="/inicio" element={<Home/>}/>
+                        <Route path="/inicio" element={<Inicio/>}/>
                         <Route path="/ayuda" element={<Ayuda/>}/>
                         <Route path="/contactos" element={<Contactos/>}/>
                         <Route path="/gastos" element={<Gastos/>}/>

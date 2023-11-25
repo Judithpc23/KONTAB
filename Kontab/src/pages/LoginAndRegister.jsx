@@ -2,6 +2,7 @@ import Carousel from "../components/Carousel";
 import { FormRegister } from "./FormRegister";
 import { FormLogin } from "./FormLogin";
 
+
 import img1 from "../assets/img/fondos/fondoKontab.png";
 import img2 from "../assets/img/fondos/artistic-mountain.jpg";
 import img3 from "../assets/img/fondos/Rmoon.jfif";
