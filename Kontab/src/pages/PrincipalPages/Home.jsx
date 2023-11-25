@@ -18,7 +18,7 @@ export function Home ({correoUsuario}, {nameUser}) {
   }
   else{
     return(
-            <MenuCompleto correoUsuario={correoUsuario}/>
+          <MenuCompleto correoUsuario={correoUsuario}/>
         )
     }
 }
