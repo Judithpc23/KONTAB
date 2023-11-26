@@ -3,12 +3,13 @@ import { LoginAndRegister } from "./pages/LoginAndRegister";
 import { MiniFormRegister } from "./pages/MiniFormRegister";
 import { Home } from './pages/Home';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 //import Form from './components/form';
 import { appFirebase } from './firebase/credenciales';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import Persona from "./core/Persona/Persona";
 
 const auth = getAuth(appFirebase)
 const firestore = getFirestore(appFirebase);
@@ -24,18 +25,41 @@ export const App = () => {
     }
 
   });
-
-
-  return (
-    <>  
-
-      <Routes>
-        {usuario ? <Route path="/"element={<Home correoUsuario = {usuario.email} informacion = {usuario.info}/>}/> : <Route path="/" element={<LoginAndRegister/>}/>}
-        <Route path="/Register" element={<MiniFormRegister/>}/>
-        <Route path="/Login" element={<LoginAndRegister/>}/>
-      </Routes>
-
-    </>
     
-  )
-}
+  const [nombre, setNombre] = useState(null);
+  const funcion = useEffect(()=>{
+    const getInfo = async() => {
+      try{
+        const docRef = doc(firestore, "usuarios", usuario.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const nombreUsuario = docSnap.data().Nombre.toString();
+          setNombre(nombreUsuario);
+        } else {
+          // docSnap.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      }catch (error) {
+        console.log('Error')
+      }
+    };
+    if (usuario) {
+      getInfo();
+    }
+  }, [usuario]);
+
+  if(usuario){
+    if(nombre != null){
+      return(
+        <Home correoUsuario={usuario.email} nombreUsuario={nombre}/>
+      )
+    }else{
+      return <p>...</p>;
+    }
+  }else{
+    return(
+      <LoginAndRegister/>
+    );
+  }
+    
+};
