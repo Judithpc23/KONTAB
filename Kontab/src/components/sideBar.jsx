@@ -5,7 +5,7 @@ import { appFirebase } from "../firebase/credenciales"
 
 const auth = getAuth(appFirebase);
 
-export function SideBarDefault({correoUsuario}) {
+export function SideBarDefault({correoUsuario,nombreUsuario}) {
     
     return (
         <div>
@@ -21,7 +21,7 @@ export function SideBarDefault({correoUsuario}) {
 
                 <Link to="/Usuario">
                     <div>
-                        <p className="lg:text-[150%] md:text-[100%]">USUARIO</p>
+                        <p className="lg:text-[150%] md:text-[100%]">{nombreUsuario}</p>
                         <p className="lg:text-[100%] md:text-[60%]">{correoUsuario}</p>
                     </div>
                 </Link>

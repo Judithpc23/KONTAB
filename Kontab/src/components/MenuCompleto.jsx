@@ -13,7 +13,7 @@ import {Inventario} from '../pages/PrincipalPages/Inventario';
 import {Usuario} from '../pages/PrincipalPages/Usuario';
 
 
-export const MenuCompleto = ({correoUsuario}) => {
+export const MenuCompleto = ({correoUsuario,nombreUsuario}) => {
 
     return(
         <div className='  flex flex-col items-center justify-center bg-gradient-to-b from-[#F5F5F5] to-[#D0DDFF] min-w-[280px] min-h-screen'>
@@ -24,12 +24,12 @@ export const MenuCompleto = ({correoUsuario}) => {
 
         <div id="SideBar" className="flex flex-row justify-between h-screen w-full bg-[#F4F8FF]">
             <div className="hidden lg:flex flex-col lg:w-[20%] md:w-[15%] min-h-screen min-w-[200px] bg-[#7BA8FF] text-white">
-                <SideBarDefault correoUsuario={correoUsuario} />
+                <SideBarDefault correoUsuario={correoUsuario} nombreUsuario={nombreUsuario}/>
             </div>
         
-            <div className="md:flex flex-col lg:items-end lg:w-full h-[58px] w-[100%] bg-[#ffff] border-b-[1px] border-[#A5C4FF]">
+            <div className="md:flex flex-col lg:items-end lg:w-full h-[50px] w-[100%] bg-[#ffff] border-b-[1px] border-[#A5C4FF]">
 
-                <NavbarDefault correoUsuario={correoUsuario}/>
+                <NavbarDefault correoUsuario={correoUsuario} nombreUsuario={nombreUsuario}/>
         
                 <div className=" flex justify-center items-center w-[100%]  min-h-[92vh] ml-5  bg-blue-500">
                     
@@ -41,7 +41,7 @@ export const MenuCompleto = ({correoUsuario}) => {
                         <Route path="/gastos" element={<Gastos/>}/>
                         <Route path="/ingresos" element={<Ingresos/>}/>
                         <Route path="/inventario" element={<Inventario/>}/>
-                        <Route path="/usuario" element={<Usuario/>}/>
+                        <Route path="/usuario" element={<Usuario nombreUsuario={nombreUsuario}/>}/>
 
                     </Routes>
                     

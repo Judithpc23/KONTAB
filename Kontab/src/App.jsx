@@ -1,15 +1,13 @@
 import { appFirebase } from './firebase/credenciales';
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth"
-import { doc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 
 //import Form from './components/form';
-import { Routes, Route } from "react-router-dom";
 import { LoginAndRegister } from "./pages/LoginAndRegister";
-import { MiniFormRegister } from "./pages/MiniFormRegister";
-import { useState } from 'react';
+import { useEffect,useState } from 'react';
 import { Home } from './pages/PrincipalPages/Home';
-import {MenuCompleto } from './components/MenuCompleto';
 
+const firestore = getFirestore(appFirebase);
 const auth = getAuth(appFirebase)
 
 export  function App () {
@@ -23,17 +21,40 @@ export  function App () {
     }
   })
   
-  if(usuario){
+  const [nombre, setNombre] = useState(null);
+  useEffect(()=>{
+    const getInfo = async() => {
+      try{
+        const docRef = doc(firestore, "usuarios", usuario.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const nombreUsuario = docSnap.data().Nombre.toString();
+          setNombre(nombreUsuario);
+        } else {
+          // docSnap.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      }catch (error) {
+        console.log('Error')
+      }
+    };
+    if (usuario) {
+      getInfo();
+    }
+  }, [usuario]);
 
-  }
-  
   if(usuario){
-    return(
-      <Home correoUsuario={usuario.email}/>
-    )
+    if(nombre != null){
+      return(
+        <Home correoUsuario={usuario.email} nombreUsuario={nombre}/>
+      )
+    }else{
+      return <p>...</p>;
+    }
   }else{
     return(
       <LoginAndRegister/>
-    )
-  }
+    );
+  }  
+
 }

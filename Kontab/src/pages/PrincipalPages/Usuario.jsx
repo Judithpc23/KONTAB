@@ -1,7 +1,6 @@
 
-export const Usuario = () => {
+export const Usuario = ({nombreUsuario}) => {
     return (
-        <h1>Usuario</h1>
-
+        <h1 className="text-9xl">{nombreUsuario}</h1>
     );
 }
