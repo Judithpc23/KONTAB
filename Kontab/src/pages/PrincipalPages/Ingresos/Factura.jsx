@@ -1,3 +1,5 @@
+import { numero } from "../Ingresos"
+
 export const Factura=()=>{
     return(
         <section className="flex flex-col px-20 pt-20">
@@ -20,7 +22,7 @@ export const Factura=()=>{
                     </div>
                     <div className="flex justify-center text-[1.4rem] text-black">
                         <h1>
-                            telefono/correo
+                            telefono ******/empresa@empresa.com
                         </h1>
                     </div>
                     <div className="flex justify-center text-[1.4rem] text-black">
@@ -30,7 +32,7 @@ export const Factura=()=>{
                     </div>
                     <div className="flex justify-center text-[1.4rem] text-black">
                         <h1>
-                            Estado, ciudad, pais, C.P
+                            Estado, ciudad, pais, C.P. *****
                         </h1>
                     </div>
                 </section>
@@ -44,7 +46,7 @@ export const Factura=()=>{
                 </div>
                 <div className="flex justify-end text-[2rem] font-semibold">
                     <h1>
-                        N. 001
+                        N. {numero}
                     </h1>
                 </div>
             </section>
@@ -160,7 +162,7 @@ export const Factura=()=>{
 }
 
 export const GenerateFactura=()=>{
-    
+
 }
 
 export const NoFactura=()=>{

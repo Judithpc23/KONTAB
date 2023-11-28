@@ -2,14 +2,57 @@ import { Button } from "@material-tailwind/react";
 import React from "react";
 import { useState } from "react";
 import { Factura, NoFactura, GenerateFactura } from "./Ingresos/Factura";
+import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
+import { set } from "lodash";
+
+
+
+export const numero = '001';
 export const Ingresos = () => {
 
-    const [selectedFactura, setSelectedFactura] = useState(false);
+    const [selectedFactura, setSelectedFactura] = useState(true);
     const [btnGenerateFactura, setGenerateFactura] = useState(false);
+    const [numero, setNumero] = useState('001');
 
     const factura = <Factura/>
     const generateFactura = <GenerateFactura/>
     const noFactura = <NoFactura/>
+
+    const handleDescargarPDF = () => {
+        // Crear un nuevo objeto jsPDF
+        const pdf = new jsPDF();
+    
+        // Agregar contenido vacío o personalizado según tus necesidades
+        pdf.text('Documento PDF vacío', 20, 20);
+    
+        // Descargar el PDF
+        pdf.save('Factura.pdf');
+      };
+
+    const handleDescargarExcel = () => {
+        // Crear una hoja de cálculo vacía
+        const ws = XLSX.utils.aoa_to_sheet([[]]);
+      
+        // Crear un libro de trabajo y agregar la hoja de cálculo
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Hoja1');
+      
+        // Convertir el libro de trabajo a un blob
+        const blob = XLSX.write(wb, { bookType: 'xlsx', type: 'blob' });
+        
+        // Crear un objeto de URL para el blob y descargarlo
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'documento.xlsx';
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
+    const handleImprimir = () => {
+        window.print();
+      };
     
     return (
         <div className="flex flex-col bg-[#F4F8FF] overflow-auto w-full px-14">
@@ -21,7 +64,7 @@ export const Ingresos = () => {
 
 
                 <section className="flex justify-start mt-15 mb-10 space-x-5">
-                    <Button className="flex justify-between capitalize bg-[#353C43] min-w-[170px] rounded shadow-md px-5">
+                    <Button onClick={handleImprimir} className="flex justify-between capitalize bg-[#353C43] min-w-[170px] rounded shadow-md px-5">
                         <div className="text-[100%] text-white font-[nunito]">
                             <h1>Imprimir</h1>
                         </div>
@@ -29,7 +72,7 @@ export const Ingresos = () => {
                         </div>
                     </Button>
 
-                    <Button className="flex justify-between capitalize bg-[#D2004B] min-w-[170px] rounded shadow-md px-5">
+                    <Button onClick={handleDescargarPDF} className="flex justify-between capitalize bg-[#D2004B] min-w-[170px] rounded shadow-md px-5">
                         <div className="text-[100%] text-white font-[nunito]">
                             <h1>Descargar PDF</h1>
                         </div>
@@ -37,7 +80,7 @@ export const Ingresos = () => {
                         </div>
                     </Button>
 
-                    <Button className="flex justify-between capitalize bg-[#009A22] min-w-[170px] rounded shadow-md px-5">
+                    <Button onClick={handleDescargarExcel} className="flex justify-between capitalize bg-[#009A22] min-w-[170px] rounded shadow-md px-5">
                         <div className="text-[100%] text-white font-[nunito]">
                             <h1>Descargar Excel</h1>
                         </div>
@@ -53,23 +96,30 @@ export const Ingresos = () => {
 
                 <section className="flex justify-start overflow-x-scroll scrollbar-none">
                     <div className="flex justify-start w-full min-h-[140px]">
-                        <Button onClick={()=> selectedFactura? setSelectedFactura(false):setSelectedFactura(true)} className="bg-[#FFFFFF] min-w-[250px] h-full rounded mr-[1%] shadow-md">
-                            <div className="text-[100%] text-black font-[nunito] font-semibold">
-                                <h1>Factura N.1</h1>
+                        <Button onClick={()=> selectedFactura? setSelectedFactura(false) & setNumero('001'):setSelectedFactura(true)} className={`${selectedFactura? 'border-b-4 border-blue-400':'border-0'} bg-[#FFFFFF] min-w-[250px] h-full rounded mr-[1%] shadow-md`}>
+                            <div className="normal-case m-5 flex flex-col items-start font-[nunito]">
+                                <h1 className="text-[2rem] font-bold text-black">Factura No. 1</h1>
+                                <h1 className="text-[1.3rem] text-neutral-600">Total:</h1>
+                                <h1 className="text-[1.3rem] text-neutral-600">Por cobrar:</h1>
                             </div>
                         </Button>
-                        <div className="bg-[#FFFFFF] min-w-[250px] h-full rounded mr-[1%] shadow-md"> 
-                            <div className="text-[100%] text-black font-[nunito] font-semibold">
-                                <h1>Factura N.2</h1>
+                        <Button onClick={()=> selectedFactura? setSelectedFactura(false) & setNumero('002'):setSelectedFactura(true)} className={`${selectedFactura? 'border-b-4 border-blue-400':'border-0'} bg-[#FFFFFF] min-w-[250px] h-full rounded mr-[1%] shadow-md`}>
+                            <div className="normal-case m-5 flex flex-col items-start font-[nunito]">
+                                <h1 className="text-[2rem] font-bold text-black">Factura No. 2</h1>
+                                <h1 className="text-[1.3rem] text-neutral-600">Total:</h1>
+                                <h1 className="text-[1.3rem] text-neutral-600">Por cobrar:</h1>
                             </div>
-                        </div>              
-                    </div> 
+                        </Button>            
+                    </div>
+                    <div>
+                        
+                    </div>
                 </section>
 
 
 
 
-                <Button onClick={()=> btnGenerateFactura? setGenerateFactura(false): setGenerateFactura(true)} className={`${btnGenerateFactura?'bg-[#5F6A85]':'bg-[#009A22]'} flex justify-center capitalize min-w-[170px] rounded shadow-md mt-10 px-5`}>
+                <Button onClick={()=> btnGenerateFactura? setGenerateFactura(false): setGenerateFactura(true)} className="bg-[#5F6A85] flex justify-center capitalize min-w-[170px] rounded shadow-md mt-10 px-5">
                     <div className="h-[20px]">
                         <h1>Generar factura</h1>
                     </div>
@@ -77,7 +127,7 @@ export const Ingresos = () => {
 
 
                 <div className="py-5">
-                    <div className="bg-[#FFFFFF] mt-5 py-5 rounded-lg shadow-md">
+                    <div className={`${selectedFactura? factura:'hidden'} bg-[#FFFFFF] mt-5 py-5 rounded-lg shadow-md`}>
                         {selectedFactura? factura:noFactura}
                     </div>
                 </div>
