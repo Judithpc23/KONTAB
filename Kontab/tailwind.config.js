@@ -7,5 +7,5 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui", 'tailwind-scrollbar')],
-}
+  plugins: [require("daisyui"), require('tailwind-scrollbar')({ nocompatible: true })]
+} 
