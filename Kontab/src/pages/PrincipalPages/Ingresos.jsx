@@ -1,17 +1,26 @@
 import { Button } from "@material-tailwind/react";
 import React from "react";
-
+import { useState } from "react";
+import { Factura, NoFactura, GenerateFactura } from "./Ingresos/Factura";
 export const Ingresos = () => {
+
+    const [selectedFactura, setSelectedFactura] = useState(false);
+    const [btnGenerateFactura, setGenerateFactura] = useState(false);
+
+    const factura = <Factura/>
+    const generateFactura = <GenerateFactura/>
+    const noFactura = <NoFactura/>
+    
     return (
-        <div className="flex flex-col bg-[#F4F8FF] w-full px-14">
-            <div className="w-full h-full">
+        <div className="flex flex-col bg-[#F4F8FF] overflow-auto w-full px-14">
+            <section className="w-full h-full">
                 <div className="text-[25px] text-black font-[nunito] font-semibold uppercase my-8">
                     <h1>facturas</h1>
                 </div>
 
 
 
-                <div className="flex justify-start mt-20 mb-10 space-x-5">
+                <section className="flex justify-start mt-15 mb-10 space-x-5">
                     <Button className="flex justify-between capitalize bg-[#353C43] min-w-[170px] rounded shadow-md px-5">
                         <div className="text-[100%] text-white font-[nunito]">
                             <h1>Imprimir</h1>
@@ -38,58 +47,44 @@ export const Ingresos = () => {
                             </svg>
                         </div>
                     </Button>
-                </div>
+                </section>
 
 
 
-                <div className="flex justify-start overflow-x-scroll scrollbar-none">
-
+                <section className="flex justify-start overflow-x-scroll scrollbar-none">
                     <div className="flex justify-start w-full min-h-[140px]">
-                        <div className="bg-[#FFFFFF] min-w-[250px] h-full rounded mr-[1%] shadow-md">
+                        <Button onClick={()=> selectedFactura? setSelectedFactura(false):setSelectedFactura(true)} className="bg-[#FFFFFF] min-w-[250px] h-full rounded mr-[1%] shadow-md">
                             <div className="text-[100%] text-black font-[nunito] font-semibold">
                                 <h1>Factura N.1</h1>
                             </div>
-                        </div>
+                        </Button>
                         <div className="bg-[#FFFFFF] min-w-[250px] h-full rounded mr-[1%] shadow-md"> 
                             <div className="text-[100%] text-black font-[nunito] font-semibold">
                                 <h1>Factura N.2</h1>
                             </div>
-                        </div>
-                        <div className="bg-[#FFFFFF] min-w-[250px] h-full rounded mr-[1%] shadow-md"> 
-                            <div className="text-[100%] text-black font-[nunito] font-semibold">
-                                <h1>Factura N.2</h1>
-                            </div>
-                        </div>
-                        <div className="bg-[#FFFFFF] min-w-[20%] h-full rounded mr-[1%] shadow-md"> 
-                            <div className="text-[100%] text-black font-[nunito] font-semibold">
-                                <h1>Factura N.2</h1>
-                            </div>
-                        </div>
-                        <div className="bg-[#FFFFFF] min-w-[20%] h-full rounded mr-[1%] shadow-md"> 
-                            <div className="text-[100%] text-black font-[nunito] font-semibold">
-                                <h1>Factura N.2</h1>
-                            </div>
-                        </div>
-                        <div className="bg-[#FFFFFF] min-w-[20%] h-full rounded mr-[1%] shadow-md"> 
-                            <div className="text-[100%] text-black font-[nunito] font-semibold">
-                                <h1>Factura N.2</h1>
-                            </div>
-                        </div>
-                        <div className="bg-[#FFFFFF] min-w-[20%] h-full rounded mr-[1%] shadow-md"> 
-                            <div className="text-[100%] text-black font-[nunito] font-semibold">
-                                <h1>Factura N.2</h1>
-                            </div>
-                        </div>                   
+                        </div>              
                     </div> 
+                </section>
+
+
+
+
+                <Button onClick={()=> btnGenerateFactura? setGenerateFactura(false): setGenerateFactura(true)} className={`${btnGenerateFactura?'bg-[#5F6A85]':'bg-[#009A22]'} flex justify-center capitalize min-w-[170px] rounded shadow-md mt-10 px-5`}>
+                    <div className="h-[20px]">
+                        <h1>Generar factura</h1>
+                    </div>
+                </Button>
+
+
+                <div className="py-5">
+                    <div className="bg-[#FFFFFF] mt-5 py-5 rounded-lg shadow-md">
+                        {selectedFactura? factura:noFactura}
+                    </div>
                 </div>
 
 
 
-                <div className="bg-[#FFFFFF] mt-10 min-h-[350px] rounded-lg shadow-md">
-
-                </div>
-
-            </div>
+            </section>
         </div>
     );
 }
