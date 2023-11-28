@@ -16,13 +16,13 @@ export const Ayuda = () => {
                     </div>
 
                     <div className="collapse-content">
-                        <p className="text-3xl m-3 mb-7">Enviar email con el inconveniente presentado.</p>
+                        <p className="text-3xl m-3 mb-7">Enviar email con el inconveniente presentado</p>
 
                         <div className="flex flex-row items-center ">
                             
                             <div className="stack w-[400px] mr-4">
 
-                                <div className=" flex justify-center items-start card shadow-md bg-gray-300 text-primary-content">
+                                <div className=" flex justify-center items-start card shadow-md bg-white text-primary-content">
                                     <div className="card-body">
                                         <h2 className="card-title text-3xl">Correo de Contacto</h2>
                                         <h2 className="card-title">cejtechinnovaciondesarrollo@gmail.com</h2>
@@ -32,7 +32,7 @@ export const Ayuda = () => {
                             </div>
 
                             <div className="stack w-[400px]">
-                                <div className="flex justify-center items-start card shadow-md bg-gray-300 text-primary-content">
+                                <div className="flex justify-center items-start card shadow-md bg-white text-primary-content">
                                     <div className="card-body">
                                         <h2 className="card-title text-3xl">Horario de Atencion</h2>
                                         <h2 className="card-title">Lunes a sabado: 8:00 a.m - 6:00 p.m.</h2>
