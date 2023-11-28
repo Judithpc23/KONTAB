@@ -6,6 +6,9 @@ import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { LoginAndRegister } from "./pages/LoginAndRegister";
 import { useEffect,useState } from 'react';
 import { Home } from './pages/PrincipalPages/Home';
+import { Usuario } from './core/Persona/Usuario';
+import { Contacto } from './core/Persona/Contacto';
+import { Cliente } from './core/Persona/Cliente';
 
 const firestore = getFirestore(appFirebase);
 const auth = getAuth(appFirebase)
@@ -45,8 +48,21 @@ export  function App () {
 
   if(usuario){
     if(nombre != null){
+      const usuarioKontab = new Usuario('', 
+      '', 
+      [], 
+      [], 
+      [], 
+      new Contacto(), 
+      '', '', 
+      '', 
+      '', 
+      '', 
+      '', 
+      '', 
+      '')
       return(
-        <Home correoUsuario={usuario.email} nombreUsuario={nombre}/>
+        <Home correoUsuario={usuario.email} nombreUsuario={nombre} usuarioKontab={usuarioKontab}/>
       )
     }else{
       return <p>...</p>;
