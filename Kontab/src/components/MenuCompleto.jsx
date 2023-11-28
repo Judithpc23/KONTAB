@@ -11,6 +11,7 @@ import {Gastos} from '../pages/PrincipalPages/Gastos';
 import {Ingresos} from '../pages/PrincipalPages/Ingresos';
 import {Inventario} from '../pages/PrincipalPages/inventario/Inventario';
 import {Usuario} from '../pages/PrincipalPages/Usuario';
+import {Analisis} from '../pages/PrincipalPages/Analisis';
 
 
 export const MenuCompleto = ({correoUsuario,nombreUsuario, usuarioKontab}) => {
@@ -31,7 +32,7 @@ export const MenuCompleto = ({correoUsuario,nombreUsuario, usuarioKontab}) => {
 
                 <NavbarDefault correoUsuario={correoUsuario} nombreUsuario={nombreUsuario}/>
         
-                <div className=" flex justify-center w-[100%]  ml-5  bg-[#F4F8FF]">
+                <div className=" flex w-[100%]  max-h-[92vh] ml-5">
                     
                     <Routes>
                     
@@ -42,6 +43,7 @@ export const MenuCompleto = ({correoUsuario,nombreUsuario, usuarioKontab}) => {
                         <Route path="/ingresos" element={<Ingresos/>}/>
                         <Route path="/inventario" element={<Inventario usuarioKontab={usuarioKontab}/>}/>
                         <Route path="/usuario" element={<Usuario nombreUsuario={nombreUsuario}/>}/>
+                        <Route path="/analisis" element={<Analisis/>}/>
 
                     </Routes>
                     
