@@ -71,7 +71,7 @@ export const Analisis = () => {
 
                         <div className="flex flex-row items-center">
                             <img className="w-14 h-25" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABR0lEQVR4nO2ZS07DMBCGfSbOACIVzwOwAakqHKEzuR6syDi9AF1wCMoCfmQcqanzUDZE4zKfNJv4+elPvHCcMwzDMI6REvVlKJczjKpgyC5WVbgcIdTnBP/B8AhFkE9CfeVyluAcZRhV0SfRlilRXbucJTgHGZ4ooVqG4C/iyXSw0a+ezSfPZBfGOg0QZNFNQr4J1WNPEvepTDwA5EalBEOeQnsqEsfUD6pkCLJIX6e2xJDImEwJfzurxBpyFhbuSvhlu9+QSNO2bMYcyDDkdDYRgkiPxCrtNybStK+6Mv51NhGGf0k/7IF+oyKBeCjsZQj++c8F9otvTgi+Zsh2DX831G+KSCDMEeZiiA9zO21MFVEPm4gyLBFtWCLasES0YYlowxLRhiWiDUtEG0eUiGxbNyRvLlfo9wJP3kNl+6PHMAzD+Bf8ACsnSZJaKpmqAAAAAElFTkSuQmCC" />
-                            <div className="text-right text-teal-300 text-5xl font-bold font-['Nunito']">62,57%</div>
+                            <div className="text-right text-teal-300 text-5xl font-bold">62,57%</div>
                         </div>
 
                     </div>
