@@ -9,7 +9,7 @@ export const Ayuda = () => {
                     <h2>Ayuda</h2>
                 </div>
 
-                <div className="collapse bg-slate-400 text-white">
+                <div className="collapse bg-blue-400 text-white">
                     <input type="checkbox" />
 
                     <div className="collapse-title text-xl font-medium">
