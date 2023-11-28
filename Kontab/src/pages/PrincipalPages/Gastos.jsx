@@ -58,7 +58,7 @@ export const Gastos = () => {
         <div className="flex flex-col bg-[#F4F8FF] overflow-auto w-full px-14">
             <section className="w-full h-full">
                 <div className="text-[25px] text-black font-[nunito] font-semibold uppercase my-8">
-                    <h1>facturas</h1>
+                    <h1>facturas de compra</h1>
                 </div>
 
 
