@@ -155,7 +155,7 @@ export const Inicio = () => {
 
                             <ResponsiveContainer width="95%" height="95%">
                                 <PieChart>
-                                    <Pie data={data02} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={0} innerRadius={60} outerRadius={140} fill="#7BA8FF" label>
+                                    <Pie data={data02} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={140} fill="#7BA8FF" label>
                                         {data02.map((entry, index) => (
                                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                         ))}

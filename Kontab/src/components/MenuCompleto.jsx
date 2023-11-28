@@ -11,6 +11,7 @@ import {Gastos} from '../pages/PrincipalPages/Gastos';
 import {Ingresos} from '../pages/PrincipalPages/Ingresos';
 import {Inventario} from '../pages/PrincipalPages/Inventario';
 import {Usuario} from '../pages/PrincipalPages/Usuario';
+import {Analisis} from '../pages/PrincipalPages/Analisis';
 
 
 export const MenuCompleto = ({correoUsuario,nombreUsuario, usuarioKontab}) => {
@@ -42,6 +43,7 @@ export const MenuCompleto = ({correoUsuario,nombreUsuario, usuarioKontab}) => {
                         <Route path="/ingresos" element={<Ingresos/>}/>
                         <Route path="/inventario" element={<Inventario/>}/>
                         <Route path="/usuario" element={<Usuario nombreUsuario={nombreUsuario}/>}/>
+                        <Route path="/analisis" element={<Analisis/>}/>
 
                     </Routes>
                     
