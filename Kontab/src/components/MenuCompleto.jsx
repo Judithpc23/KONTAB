@@ -6,10 +6,10 @@ import { motion } from "framer-motion";
 
 import {Inicio} from '../pages/PrincipalPages/Inicio';
 import {Ayuda} from '../pages/PrincipalPages/Ayuda';
-import {Contactos} from '../pages/PrincipalPages/Contactos';
+import {Contactos} from '../pages/PrincipalPages/contactos/Contactos';
 import {Gastos} from '../pages/PrincipalPages/Gastos';
 import {Ingresos} from '../pages/PrincipalPages/Ingresos';
-import {Inventario} from '../pages/PrincipalPages/Inventario';
+import {Inventario} from '../pages/PrincipalPages/inventario/Inventario';
 import {Usuario} from '../pages/PrincipalPages/Usuario';
 
 
@@ -40,7 +40,7 @@ export const MenuCompleto = ({correoUsuario,nombreUsuario, usuarioKontab}) => {
                         <Route path="/contactos" element={<Contactos usuarioKontab={usuarioKontab}/>}/>
                         <Route path="/gastos" element={<Gastos/>}/>
                         <Route path="/ingresos" element={<Ingresos/>}/>
-                        <Route path="/inventario" element={<Inventario/>}/>
+                        <Route path="/inventario" element={<Inventario usuarioKontab={usuarioKontab}/>}/>
                         <Route path="/usuario" element={<Usuario nombreUsuario={nombreUsuario}/>}/>
 
                     </Routes>

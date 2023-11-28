@@ -48,13 +48,15 @@ export  function App () {
 
   if(usuario){
     if(nombre != null){
-      const usuarioKontab = new Usuario('', 
+      const usuarioKontab = new Usuario(
+      '', 
       '', 
       [], 
       [], 
       [], 
       new Contacto(), 
-      '', '', 
+      '', 
+      '', 
       '', 
       '', 
       '', 

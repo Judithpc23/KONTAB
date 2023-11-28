@@ -22,15 +22,15 @@ export function txtInput(id, type, label, required){
     )
 }
 
-export function fileInput(){
+export function fileInput(id='', nombre='Subir logo'){
     return(
         <>
 
 <div className="form-control w-full">
   <label className="label">
-    <span className="font-[nunito-sans]">Subir logo</span>
+    <span className="font-[nunito-sans]">{nombre}</span>
   </label>
-  <input type="file" className="file-input file-input-bordered w-full file-input-ghost" />
+  <input id={id} type="file" accept="image/*" className="file-input file-input-bordered w-full file-input-ghost" />
   
 </div>
 

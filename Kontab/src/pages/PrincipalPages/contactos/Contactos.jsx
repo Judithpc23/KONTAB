@@ -1,12 +1,9 @@
 import { Button } from "@material-tailwind/react"
 import { useState } from "react";
-import { usuario1 } from "../../core/Persona/Usuario";
-import { Clientes } from "./contactos/clientes/Clientes";
-import { NoContact } from "./contactos/NoContact";
-import { Proveedores } from "./contactos/proveedores/Proveedores";
-import { Vendedores } from "./contactos/vendedores/Vendedores";
-import { Proveedor } from "../../core/Persona/Proveedor";
-import { Cliente } from "../../core/Persona/Cliente";
+import { Clientes } from "./clientes/Clientes";
+import { NoContact } from "./NoContact";
+import { Proveedores } from "./proveedores/Proveedores";
+import { Vendedores } from "./vendedores/Vendedores";
 
 export const Contactos = ({usuarioKontab}) => {
     const [proveedor, setProveedor] = useState(true);
@@ -74,13 +71,10 @@ export const Contactos = ({usuarioKontab}) => {
                     <input type="text" placeholder="Buscar ..." className="focus:outline-none focus:border-0 flex items-center bg-transparent w-full h-full rounded-r-full text-[15px] placeholder:text-[#353C43] text-[#353c43] appearance-none"></input>
                 </form>
             </div>
-
+            
             <div>
                 {proveedor?renderProveedores:vendedor?renderVendedores:renderClientes}
             </div>
-
-            
         </div>
-
     );
 }

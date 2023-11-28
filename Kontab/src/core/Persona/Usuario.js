@@ -6,61 +6,88 @@ import { Vendedor } from "./Vendedor.js";
 
 export class Usuario extends Persona {
 
-    constructor(usuario, empresa, inventario, facturasVenta, facturasCompra, contactos, reporte, id, nombre, pais, ciudad, direccion, correo, telefono){
-        super(id, nombre, pais, ciudad, direccion, correo, telefono)
-        this.usuario = usuario;
-        this.empresa = empresa;
-        this.inventario = inventario;
-        this.facturasVenta = facturasVenta;
-        this. facturasCompra = facturasCompra;
-        this.contactos = contactos;
-        this.reporte = reporte;
-    }
+  constructor(usuario, empresa, inventario, facturasVenta, facturasCompra, contactos, reporte, id, nombre, pais, ciudad, direccion, correo, telefono){
+      super(id, nombre, pais, ciudad, direccion, correo, telefono)
+      this.usuario = usuario;
+      this.empresa = empresa;
+      this.inventario = inventario;
+      this.facturasVenta = facturasVenta;
+      this. facturasCompra = facturasCompra;
+      this.contactos = contactos;
+      this.reporte = reporte;
+  }
 
-    add_cliente(cliente){
-      if(this.contactos.clientes.length === 0){
-        this.contactos.clientes.push(cliente);
-        return true;  
-      }
-      for(let i=0; i<this.contactos.clientes.length; i++){
-        if (this.contactos.clientes[i].id === cliente.id){
-          return(false)
-        }
-      }
+  add_cliente(cliente){
+    if(this.contactos.clientes.length === 0){
       this.contactos.clientes.push(cliente);
-      return true
+      return true;  
     }
+    for(let i=0; i<this.contactos.clientes.length; i++){
+      if (this.contactos.clientes[i].id === cliente.id){
+        return(false)
+      }
+    }
+    this.contactos.clientes.push(cliente);
+    return true
+  }
 
-    add_proveedor(proveedor){
-      if(this.contactos.proveedores.length === 0){
-        this.contactos.proveedores.push(proveedor);
-        return true;  
-      }
-      for(let i=0; i<this.contactos.proveedores.length; i++){
-        if (this.contactos.proveedores[i].id === proveedor.id){
-          return(false)
-        }
-      }
+  add_proveedor(proveedor){
+    if(this.contactos.proveedores.length === 0){
       this.contactos.proveedores.push(proveedor);
-      return true
+      return true;  
     }
+    for(let i=0; i<this.contactos.proveedores.length; i++){
+      if (this.contactos.proveedores[i].id === proveedor.id){
+        return(false)
+      }
+    }
+    this.contactos.proveedores.push(proveedor);
+    return true
+  }
 
-    add_vendedor(vendedor){
-      if(this.contactos.vendedores.length === 0){
-        this.contactos.vendedores.push(vendedor);
-        return true;  
-      }
-      for(let i=0; i<this.contactos.vendedores.length; i++){
-        if (this.contactos.vendedores[i].id === vendedor.id){
-          return(false)
-        }
-      }
+  add_vendedor(vendedor){
+    if(this.contactos.vendedores.length === 0){
       this.contactos.vendedores.push(vendedor);
-      return true
+      return true;  
     }
+    for(let i=0; i<this.contactos.vendedores.length; i++){
+      if (this.contactos.vendedores[i].id === vendedor.id){
+        return(false)
+      }
+    }
+    this.contactos.vendedores.push(vendedor);
+    return true
+  }
+  
+  add_producto(producto){
+    if(this.inventario.length === 0){
+      this.inventario.push(producto);
+      return true;  
+    }
+    for(let i=0; i<this.inventario.length; i++){
+      if (this.inventario[i].idProducto === producto.id){
+        return(false)
+      }
+    }
+    this.inventario.push(producto);
+    return true
+  }
+
+  eliminar_producto(idProducto){
+    for (let i = 0; i < this.inventario.length; i++) {
+      if (idProducto === this.inventario[i].idProducto){
+        delete(this.inventario[i])
+        console.log(this.inventario)
+        return true
+      }
+    }
+    return false;
+  }
+
+}
 
     
-}
+
 
 const usuario1 = new Usuario(
   '', 
