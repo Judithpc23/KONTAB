@@ -31,11 +31,7 @@ export const MenuCompleto = ({correoUsuario,nombreUsuario, usuarioKontab}) => {
 
                 <NavbarDefault correoUsuario={correoUsuario} nombreUsuario={nombreUsuario}/>
         
-<<<<<<< Updated upstream
-                <div className=" flex justify-center w-[100%]  ml-5  bg-[#F4F8FF]">
-=======
                 <div className=" flex w-[100%]  max-h-[92vh] ml-5">
->>>>>>> Stashed changes
                     
                     <Routes>
                     
