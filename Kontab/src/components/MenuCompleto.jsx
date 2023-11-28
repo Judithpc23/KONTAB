@@ -13,7 +13,7 @@ import {Inventario} from '../pages/PrincipalPages/Inventario';
 import {Usuario} from '../pages/PrincipalPages/Usuario';
 
 
-export const MenuCompleto = ({correoUsuario,nombreUsuario}) => {
+export const MenuCompleto = ({correoUsuario,nombreUsuario, usuarioKontab}) => {
 
     return(
         <div className='  flex flex-col items-center justify-center bg-gradient-to-b from-[#F5F5F5] to-[#D0DDFF] min-w-[280px] min-h-screen'>
@@ -31,13 +31,13 @@ export const MenuCompleto = ({correoUsuario,nombreUsuario}) => {
 
                 <NavbarDefault correoUsuario={correoUsuario} nombreUsuario={nombreUsuario}/>
         
-                <div className=" flex justify-center items-center w-[100%]  min-h-[92vh] ml-5  bg-blue-500">
+                <div className=" flex justify-center w-[100%]  ml-5  bg-[#F4F8FF]">
                     
                     <Routes>
                     
                         <Route path="/inicio" element={<Inicio/>}/>
                         <Route path="/ayuda" element={<Ayuda/>}/>
-                        <Route path="/contactos" element={<Contactos/>}/>
+                        <Route path="/contactos" element={<Contactos usuarioKontab={usuarioKontab}/>}/>
                         <Route path="/gastos" element={<Gastos/>}/>
                         <Route path="/ingresos" element={<Ingresos/>}/>
                         <Route path="/inventario" element={<Inventario/>}/>

@@ -3,7 +3,7 @@ import { LoadingPage } from "../../components/Loading"
 import { MenuCompleto } from "../../components/MenuCompleto"
 
 
-export function Home ({correoUsuario,nombreUsuario}) {
+export function Home ({correoUsuario,nombreUsuario,usuarioKontab}) {
 
     const [loading, setLoading] = useState(false)
     useEffect(()=>{
@@ -19,7 +19,7 @@ export function Home ({correoUsuario,nombreUsuario}) {
   }
   else{
     return(
-          <MenuCompleto correoUsuario={correoUsuario} nombreUsuario={nombreUsuario}/>
+          <MenuCompleto correoUsuario={correoUsuario} nombreUsuario={nombreUsuario} usuarioKontab={usuarioKontab}/>
         )
     }
 }
